@@ -1,17 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Feliz 2 anos!!!!</title>
 
     <style>
-        body{
+        body {
             background-color: red;
         }
 
-        .painel{
+        .painel {
             margin: auto;
             background-color: white;
             width: 500px;
@@ -21,7 +21,8 @@
             padding-top: 50px;
             font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
         }
-        #sim{
+
+        #sim {
             position: absolute;
             height: 40px;
             width: 60px;
@@ -31,7 +32,8 @@
             color: white;
             margin-left: -50px;
         }
-        #nao{
+
+        #nao {
             position: absolute;
             height: 40px;
             width: 60px;
@@ -41,38 +43,101 @@
             color: white;
             margin-left: 10px;
         }
-        #problemaseu{
-    
+
+        #problemaseu {
             height: 40px;
             width: 80px;
             background-color: red;
             border: 2px solid white;
             border-radius: 10px;
-            color: white; 
-            opacity: 0.15;
+            color: white;
+            opacity: 0.1;
             margin-top: 360px;
         }
 
+        /* Adicione o estilo para centralizar o texto nas páginas 1, 2 e 3 */
+        #page1, #page2, #page3 {
+            text-align: center;
+        }
     </style>
-
 </head>
+
 <body>
 
-    <div class="painel">
-        <h1> Você diz que me ama</h1>
+    <div id="page1" style="display: block;">
+        <h1>No universo infinito, somos a canção que atravessa as estrelas,</h1>
+        <h1>a dança sideral que faz constelações suspirarem.</h1>
+        <h1> O que somos nós, senão a melodia dos astros?</h1>
+        <p>Qual é a sua resposta?</p>
+        <input type="text" id="resposta1">
+        <button onclick="verificarResposta('resposta1', 'page2')">Avançar</button>
+    </div>
 
-        <img src="https://gifman.net/wp-content/uploads/2019/06/ursinho-fofo-apaixonado.gif" alt="">
+    <div id="page2" style="display: none;">
+        <h1>Na proximidade, sem alarde,</h1>
+        <h1>Um sinal sutil é compartilhado</h1>
+        <h1>Sem falas, sem virtude,</h1>
+        <h1>A mensagem chega em um suave...</h1>
+        <p>Qual é a sua próxima resposta?</p>
+        <input type="text" id="resposta2">
+        <button onclick="verificarResposta('resposta2', 'page3')">Avançar</button>
+    </div>
 
-        <h2> e eu digo...</h2>
-        
-        <button id="sim" onclick="parabens()"> Eu te amo </button>
-        <a href="https://www.youtube.com/watch?v=1ArlVjfekuM"><button id="problemaseu" > Problema Seu </button></a>
-        <button onmouseover="fuja()" id="nao"> Eu também </button>
-        
+    <div id="page3" style="display: none;">
+        <h1>Em um trajeto misterioso, ela partiu sem saber,</h1>
+        <h1>Rumo a curiosidade, para o enigma entender.</h1>
+        <h1>O mudo, fiel, sem desvendar o segredo,</h1>
+        <h1>Me fale agora, o destino desse enredo</h1>
+        <p>Qual é a sua próxima resposta?</p>
+        <input type="text" id="resposta3">
+        <button onclick="verificarResposta('resposta3', 'page4')">Avançar</button>
+    </div>
+
+    <div id="page4" style="display: none;">
+        <div class="painel">
+            <h1> Você diz que me ama</h1>
+
+            <img src="https://gifman.net/wp-content/uploads/2019/06/ursinho-fofo-apaixonado.gif" alt="">
+
+            <h2> e eu digo...</h2>
+
+            <button id="sim" onclick="parabens()"> Eu te amo </button>
+            <a href="https://www.youtube.com/watch?v=1ArlVjfekuM"><button id="problemaseu"> Problema Seu </button></a>
+            <button onmouseover="fuja()" id="nao"> Eu não te amo </button>
+        </div>
     </div>
 
     <script>
-        function fuja(){
+        function verificarResposta(idResposta, proximaPagina) {
+            var resposta = document.getElementById(idResposta).value.toLowerCase();
+            var respostaCorreta;
+
+            switch (idResposta) {
+                case 'resposta1':
+                    respostaCorreta = 'sintonia do céu';
+                    break;
+                case 'resposta2':
+                    respostaCorreta = 'pru';
+                    break;
+                case 'resposta3':
+                    respostaCorreta = 'morro dona marta';
+                    break;
+                // Adicione mais casos conforme necessário
+            }
+
+            if (resposta === respostaCorreta) {
+                document.getElementById(idResposta).disabled = true;
+                document.getElementById('page1').style.display = 'none';
+                document.getElementById('page2').style.display = 'none';
+                document.getElementById('page3').style.display = 'none';
+                document.getElementById('page4').style.display = 'none';
+                document.getElementById(proximaPagina).style.display = 'block';
+            } else {
+                alert('Resposta incorreta. Tente novamente.');
+            }
+        }
+
+        function fuja() {
             var botaoNao = document.getElementById("nao")
 
             var larguraJanela = window.innerWidth;
@@ -80,23 +145,18 @@
 
             var maxX = larguraJanela - botaoNao.offsetWidth;
             var maxY = alturaJanela - botaoNao.offsetHeight;
-
             var aleatorioX = Math.floor(Math.random() * maxX);
             var aleatorioY = Math.floor(Math.random() * maxY);
 
             botaoNao.style.left = aleatorioX + "px";
             botaoNao.style.top = aleatorioY + "px";
-
-
         }
 
-        function parabens(){
-            alert("Muito cara pálida achar que vai ser fácil assim!!")
+        function parabens() {
+            alert("Muito cara pálida achar que vai ser fácil assim!!");
         }
     </script>
 
-
-
-    
 </body>
+
 </html>
